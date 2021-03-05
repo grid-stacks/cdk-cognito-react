@@ -22,6 +22,25 @@
     "@aws-cdk/cx-api" "1.91.0"
     constructs "^3.2.0"
 
+"@aws-cdk/aws-apigateway@^1.91.0":
+  version "1.91.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-apigateway/-/aws-apigateway-1.91.0.tgz#27660a1c6563efbec7f9c6a467047faa2309a8ba"
+  integrity sha512-zzINWIy5euOm7sqsIGzyBK8+58pot6YPDfV3Wsv4TiCBinKXGxppTp4h1hkDi1DjH6z4w8+CKp4uA8E+fRtrgQ==
+  dependencies:
+    "@aws-cdk/aws-certificatemanager" "1.91.0"
+    "@aws-cdk/aws-cloudwatch" "1.91.0"
+    "@aws-cdk/aws-cognito" "1.91.0"
+    "@aws-cdk/aws-ec2" "1.91.0"
+    "@aws-cdk/aws-elasticloadbalancingv2" "1.91.0"
+    "@aws-cdk/aws-iam" "1.91.0"
+    "@aws-cdk/aws-lambda" "1.91.0"
+    "@aws-cdk/aws-logs" "1.91.0"
+    "@aws-cdk/aws-s3" "1.91.0"
+    "@aws-cdk/aws-s3-assets" "1.91.0"
+    "@aws-cdk/core" "1.91.0"
+    "@aws-cdk/cx-api" "1.91.0"
+    constructs "^3.2.0"
+
 "@aws-cdk/aws-applicationautoscaling@1.91.0":
   version "1.91.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-applicationautoscaling/-/aws-applicationautoscaling-1.91.0.tgz#a38fcb971dc28e52ee526a27d2467455afeac92a"
@@ -84,7 +103,7 @@
     "@aws-cdk/core" "1.91.0"
     constructs "^3.2.0"
 
-"@aws-cdk/aws-cognito@^1.91.0":
+"@aws-cdk/aws-cognito@1.91.0", "@aws-cdk/aws-cognito@^1.91.0":
   version "1.91.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cognito/-/aws-cognito-1.91.0.tgz#f6d36151e6c1b60a182e96c931ef267a53984b91"
   integrity sha512-IC95IwQejfFQ/+N+Z5saGq/ywM8nEWdkUxLKaQVIWdOvHryYSj39ythakX7ybI5lq2z4KW2rLuxNmiA9gT0+Ow==
@@ -149,6 +168,23 @@
     "@aws-cdk/cloud-assembly-schema" "1.91.0"
     "@aws-cdk/core" "1.91.0"
     "@aws-cdk/cx-api" "1.91.0"
+    constructs "^3.2.0"
+
+"@aws-cdk/aws-elasticloadbalancingv2@1.91.0":
+  version "1.91.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-elasticloadbalancingv2/-/aws-elasticloadbalancingv2-1.91.0.tgz#8a231d750343f2c0c92e153bf81f16bcb482d662"
+  integrity sha512-m3JITeu2P1gv3jclC5MM5NN8h3YQv3IssSzuc5OloWI3u3J9f2dSh2V+M7o/JKeXmLpanqZJTl2rSmRJwWLVQA==
+  dependencies:
+    "@aws-cdk/aws-certificatemanager" "1.91.0"
+    "@aws-cdk/aws-cloudwatch" "1.91.0"
+    "@aws-cdk/aws-ec2" "1.91.0"
+    "@aws-cdk/aws-iam" "1.91.0"
+    "@aws-cdk/aws-lambda" "1.91.0"
+    "@aws-cdk/aws-s3" "1.91.0"
+    "@aws-cdk/cloud-assembly-schema" "1.91.0"
+    "@aws-cdk/core" "1.91.0"
+    "@aws-cdk/cx-api" "1.91.0"
+    "@aws-cdk/region-info" "1.91.0"
     constructs "^3.2.0"
 
 "@aws-cdk/aws-events@1.91.0":
