@@ -15,6 +15,10 @@ const FB = {
 const User = Loadable(() => import("./user/User"), FB);
 const Count = Loadable(() => import("./count/Count"), FB);
 const Post = Loadable(() => import("./post/Post"), FB);
+const CognitoComponents = Loadable(
+	() => import("./cognito/CognitoComponents"),
+	FB
+);
 
 // const user = null;
 const user = { name: "DHN Chandan" };
@@ -23,6 +27,9 @@ const ExampleComponent: FC = () => {
 	return (
 		<div>
 			<ul>
+				<li>
+					<Link to={ROUTER.COGNITO}>Cognito Authentication</Link>
+				</li>
 				<li>
 					<Link to={ROUTER.USER}>User</Link>
 				</li>
@@ -38,6 +45,9 @@ const ExampleComponent: FC = () => {
 			</ul>
 			<hr />
 			<Switch>
+				<ProtectedRouter user={user} path={ROUTER.COGNITO} exact>
+					<CognitoComponents />
+				</ProtectedRouter>
 				<ProtectedRouter
 					user={user}
 					loginPath={ROUTER.LOGIN}

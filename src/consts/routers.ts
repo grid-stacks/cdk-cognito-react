@@ -1,5 +1,6 @@
 const ROUTER = {
 	HOME: "/",
+	COGNITO: "/cognito",
 	USER: "/user",
 	COUNT: "/count",
 	POST: "/post",
