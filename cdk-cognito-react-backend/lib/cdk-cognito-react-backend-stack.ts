@@ -109,7 +109,7 @@ export class CdkCognitoReactBackendStack extends cdk.Stack {
 
 		// GET method for the random number API resource. It uses Cognito for
 		// authorization and the authorizer defined above.
-		randomNumber.addMethod(
+		const apiMethod = randomNumber.addMethod(
 			"GET",
 			new api.LambdaIntegration(randomNumberFunction),
 			{
@@ -117,7 +117,37 @@ export class CdkCognitoReactBackendStack extends cdk.Stack {
 				authorizer: {
 					authorizerId: authorizer.ref,
 				},
+				apiKeyRequired: true,
 			}
 		);
+
+		const key = randomNumberFunctionRestApi.addApiKey(
+			"randomNumberFunctionRestApiKey"
+		);
+
+		const plan = randomNumberFunctionRestApi.addUsagePlan(
+			"randomNumberFunctionRestApiUsagePlan",
+			{
+				name: "Easy",
+				apiKey: key,
+				throttle: {
+					rateLimit: 100,
+					burstLimit: 20,
+				},
+			}
+		);
+
+		plan.addApiStage({
+			stage: randomNumberFunctionRestApi.deploymentStage,
+			throttle: [
+				{
+					method: apiMethod,
+					throttle: {
+						rateLimit: 100,
+						burstLimit: 20,
+					},
+				},
+			],
+		});
 	}
 }
