@@ -3,6 +3,7 @@ import Amplify, { Auth as CognitoAuth } from "aws-amplify";
 import {
 	AmplifyAuthenticator,
 	AmplifySignOut,
+	AmplifyChatbot,
 	// AmplifySignIn,
 	// AmplifySignUp,
 	// AmplifyForgotPassword,
@@ -25,6 +26,7 @@ Amplify.configure({
 });
 
 const CognitoComponents: FC = () => {
+	const [apiId, setApiId] = React.useState<string>("");
 	const [authState, setAuthState] = React.useState<AuthState>();
 	const [user, setUser] = React.useState<
 		Record<string, unknown> | undefined
@@ -34,20 +36,48 @@ const CognitoComponents: FC = () => {
 		return onAuthUIStateChange((nextAuthState, authData) => {
 			setAuthState(nextAuthState);
 			setUser(authData as Record<string, unknown>);
+			console.log(authData);
 		});
 	}, []);
 
 	CognitoAuth.currentAuthenticatedUser()
-		.then((user) => console.log({ user }))
+		.then((user) => {
+			console.log({ user });
+			CognitoAuth.userAttributes(user)
+				.then((attributes) => console.log({ attributes }))
+				.catch((err) => console.log(err));
+		})
 		.catch((err) => console.log(err));
 	CognitoAuth.currentSession()
 		.then((session) => console.log({ session }))
 		.catch((err) => console.log(err));
 
+	const handleSubmit = () => {
+		CognitoAuth.updateUserAttributes(user, {
+			"custom:apiId": apiId,
+		})
+			.then((success) => console.log(success))
+			.catch((err) => console.log(err));
+	};
+
 	return authState === AuthState.SignedIn && user ? (
 		<div className="App">
 			<div>Hello, {user.username}</div>
+			<input
+				type="text"
+				placeholder="Give your apiId"
+				name="apiId"
+				value={apiId}
+				onChange={(e) => setApiId(e.target.value)}
+			/>
+			<button onClick={handleSubmit}>Submit Api ID</button>
 			<AmplifySignOut />
+			<AmplifyChatbot
+				botName="awsBotName"
+				botTitle="AWS ChatBot"
+				welcomeMessage="Hello, how can I help you?"
+				conversationModeOn={true}
+			/>
 		</div>
 	) : (
 		<AmplifyAuthenticator />
