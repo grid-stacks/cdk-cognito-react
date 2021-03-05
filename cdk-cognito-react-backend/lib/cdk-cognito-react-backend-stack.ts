@@ -80,6 +80,11 @@ export class CdkCognitoReactBackendStack extends cdk.Stack {
 				restApiName: "CDK Cognito React Random Number API",
 				handler: randomNumberFunction,
 				proxy: false,
+				defaultCorsPreflightOptions: {
+					allowOrigins: api.Cors.ALL_ORIGINS,
+					allowMethods: api.Cors.ALL_METHODS,
+					allowHeaders: ["*"],
+				},
 			}
 		);
 
@@ -99,7 +104,7 @@ export class CdkCognitoReactBackendStack extends cdk.Stack {
 
 		// Random number API path
 		const randomNumber = randomNumberFunctionRestApi.root.addResource(
-			"random_number"
+			"random-number"
 		);
 
 		// GET method for the random number API resource. It uses Cognito for

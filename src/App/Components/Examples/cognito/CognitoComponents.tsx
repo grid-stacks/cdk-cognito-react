@@ -28,29 +28,47 @@ Amplify.configure({
 const CognitoComponents: FC = () => {
 	const [apiId, setApiId] = React.useState<string>("");
 	const [authState, setAuthState] = React.useState<AuthState>();
-	const [user, setUser] = React.useState<
-		Record<string, unknown> | undefined
-	>();
+	const [user, setUser] = React.useState<Record<string, any> | undefined>();
 
 	React.useEffect(() => {
 		return onAuthUIStateChange((nextAuthState, authData) => {
 			setAuthState(nextAuthState);
-			setUser(authData as Record<string, unknown>);
+			setUser(authData as Record<string, any>);
 			console.log(authData);
 		});
 	}, []);
 
-	CognitoAuth.currentAuthenticatedUser()
-		.then((user) => {
-			console.log({ user });
-			CognitoAuth.userAttributes(user)
-				.then((attributes) => console.log({ attributes }))
-				.catch((err) => console.log(err));
-		})
-		.catch((err) => console.log(err));
-	CognitoAuth.currentSession()
-		.then((session) => console.log({ session }))
-		.catch((err) => console.log(err));
+	React.useEffect(() => {
+		if (user) {
+			fetch(
+				"https://ta6ixp5aoc.execute-api.us-east-1.amazonaws.com/prod/random-number",
+				{
+					headers: {
+						Authorization: `${user.signInUserSession.idToken.jwtToken}`,
+						"Content-Type": "application/json",
+					},
+				}
+			)
+				.then((res) => res.json())
+				.then((json) => console.log(json));
+			// console.log(
+			// 	"------------",
+			// 	user ? user.signInUserSession.idToken.jwtToken : null
+			// );
+		}
+	}, [user]);
+
+	// CognitoAuth.currentAuthenticatedUser()
+	// 	.then((user) => {
+	// 		console.log({ user });
+	// 		CognitoAuth.userAttributes(user)
+	// 			.then((attributes) => console.log({ attributes }))
+	// 			.catch((err) => console.log(err));
+	// 	})
+	// 	.catch((err) => console.log(err));
+	// CognitoAuth.currentSession()
+	// 	.then((session) => console.log({ session }))
+	// 	.catch((err) => console.log(err));
 
 	const handleSubmit = () => {
 		CognitoAuth.updateUserAttributes(user, {
