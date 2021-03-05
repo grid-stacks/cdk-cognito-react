@@ -35,6 +35,7 @@
 		]
 	},
 	"dependencies": {
+		"@aws-amplify/ui-components": "^1.0.3",
 		"@aws-amplify/ui-react": "^1.0.3",
 		"@reduxjs/toolkit": "^1.5.0",
 		"@rtk-incubator/rtk-query": "^0.2.0",

@@ -143,7 +143,7 @@
     events "^3.1.0"
     sinon "^7.5.0"
 
-"@aws-amplify/ui-components@1.0.3":
+"@aws-amplify/ui-components@1.0.3", "@aws-amplify/ui-components@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@aws-amplify/ui-components/-/ui-components-1.0.3.tgz#b15e07571435858822c43a064fd77ece1384d791"
   integrity sha512-Pds5T639xCWNWBC7FiwDbytoQQ7kJ0xGeBm/5UbDCrNbTdI/elBt/r2wttjMF8nB4eCxP5ghdoFLdIYM0t4mPw==
