@@ -22,6 +22,11 @@ export class CdkCognitoReactBackendStack extends cdk.Stack {
 					mutable: true,
 				}),
 				joinedOn: new cognito.DateTimeAttribute(),
+				plan: new cognito.StringAttribute({
+					minLen: 1,
+					maxLen: 256,
+					mutable: true,
+				}),
 			},
 			passwordPolicy: {
 				minLength: 8,
