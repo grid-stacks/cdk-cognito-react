@@ -8,7 +8,8 @@
 		"build": "tsc",
 		"watch": "tsc -w",
 		"test": "jest",
-		"cdk": "cdk"
+		"cdk": "cdk",
+		"lambda-test": "node -e \"(async () => console.log(await require('./lambda-functions/api-key-generator.js').handler({'sub': 'ce526868-3fc9-43cf-8631-5c32f3345edc', 'username': 'dhnchandan'})))();\""
 	},
 	"devDependencies": {
 		"@aws-cdk/assert": "1.91.0",
@@ -25,6 +26,7 @@
 		"@aws-cdk/aws-cognito": "^1.91.0",
 		"@aws-cdk/aws-lambda": "^1.91.0",
 		"@aws-cdk/core": "1.91.0",
+		"aws-sdk": "^2.858.0",
 		"source-map-support": "^0.5.16"
 	}
 }

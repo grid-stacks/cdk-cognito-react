@@ -62,11 +62,24 @@ export class CdkCognitoReactBackendStack extends cdk.Stack {
 		});
 
 		// Function that returns 200 with a random number
+		const apiKeyGeneratorFunction = new lambda.Function(
+			this,
+			"CdkCognitoReactLambdaApiKeyGenerator",
+			{
+				code: new lambda.AssetCode(
+					"lambda-functions/api-key-generator"
+				),
+				handler: "api-key-generator.handler",
+				runtime: lambda.Runtime.NODEJS_14_X,
+			}
+		);
+
+		// Function that returns 200 with a random number
 		const randomNumberFunction = new lambda.Function(
 			this,
 			"CdkCognitoReactLambdaRandomNumber",
 			{
-				code: new lambda.AssetCode("lambda-functions"),
+				code: new lambda.AssetCode("lambda-functions/random-number"),
 				handler: "random-number.handler",
 				runtime: lambda.Runtime.NODEJS_14_X,
 			}

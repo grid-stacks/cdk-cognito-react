@@ -26,7 +26,7 @@ Amplify.configure({
 });
 
 const CognitoComponents: FC = () => {
-	const [apiId, setApiId] = React.useState<string>("");
+	const [plan, setPlan] = React.useState<string>("");
 	const [authState, setAuthState] = React.useState<AuthState>();
 	const [user, setUser] = React.useState<Record<string, any> | undefined>();
 
@@ -39,11 +39,12 @@ const CognitoComponents: FC = () => {
 	}, []);
 
 	React.useEffect(() => {
-		if (user) {
+		if (user && user.attributes) {
 			fetch(
 				"https://ta6ixp5aoc.execute-api.us-east-1.amazonaws.com/prod/random-number",
 				{
 					headers: {
+						"x-api-key": `${user.attributes["custom:apiId"]}`,
 						Authorization: `${user.signInUserSession.idToken.jwtToken}`,
 						"Content-Type": "application/json",
 					},
@@ -72,7 +73,7 @@ const CognitoComponents: FC = () => {
 
 	const handleSubmit = () => {
 		CognitoAuth.updateUserAttributes(user, {
-			"custom:apiId": apiId,
+			"custom:plan": plan,
 		})
 			.then((success) => console.log(success))
 			.catch((err) => console.log(err));
@@ -83,12 +84,12 @@ const CognitoComponents: FC = () => {
 			<div>Hello, {user.username}</div>
 			<input
 				type="text"
-				placeholder="Give your apiId"
-				name="apiId"
-				value={apiId}
-				onChange={(e) => setApiId(e.target.value)}
+				placeholder="Give your plan"
+				name="plan"
+				value={plan}
+				onChange={(e) => setPlan(e.target.value)}
 			/>
-			<button onClick={handleSubmit}>Submit Api ID</button>
+			<button onClick={handleSubmit}>Submit Plan</button>
 			<AmplifySignOut />
 			<AmplifyChatbot
 				botName="awsBotName"
